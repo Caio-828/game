@@ -39,7 +39,7 @@ public partial class ToggleScene : Area2D
 			return;
 		}
 
-		bool ?flipH = _diretionToInteract != 0 ? _diretionToInteract < 0 : StatePlayer.FlipH;
+		bool? flipH = _diretionToInteract != 0 ? _diretionToInteract < 0 : StatePlayer.FlipH;
 		bool isCorrectFlip = StatePlayer.FlipH == flipH;
 
 		bool canChangeScene = (
