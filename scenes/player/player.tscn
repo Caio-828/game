@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=3 uid="uid://d0p2nwk3rfc0u"]
+[gd_scene load_steps=35 format=3 uid="uid://d0p2nwk3rfc0u"]
 
 [ext_resource type="Texture2D" uid="uid://c37omn8y3bv1k" path="res://assets/sprite_sheets/player.png" id="1_3vyb7"]
 [ext_resource type="Script" uid="uid://cywbsv1r43huk" path="res://scripts/player/Player.cs" id="1_gmlin"]
@@ -13,7 +13,10 @@
 [ext_resource type="Script" uid="uid://cqdj0ogjqkjd2" path="res://scripts/player/state/components/WallJumpComponent.cs" id="9_5gtgg"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0owmy"]
-size = Vector2(12, 45)
+size = Vector2(14.5037, 36.0624)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_je7p5"]
+size = Vector2(14.5, 33)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_5gtgg"]
 atlas = ExtResource("1_3vyb7")
@@ -193,9 +196,16 @@ collision_mask = 30
 floor_snap_length = 10.0
 script = ExtResource("1_gmlin")
 
-[node name="collision" type="CollisionShape2D" parent="."]
+[node name="default_collision" type="CollisionShape2D" parent="."]
 visibility_layer = 2
+position = Vector2(0, 0.5)
 shape = SubResource("RectangleShape2D_0owmy")
+script = ExtResource("2_je7p5")
+
+[node name="dash_collision" type="CollisionShape2D" parent="."]
+position = Vector2(0, 2)
+shape = SubResource("RectangleShape2D_je7p5")
+disabled = true
 script = ExtResource("2_je7p5")
 
 [node name="state" type="Node2D" parent="."]

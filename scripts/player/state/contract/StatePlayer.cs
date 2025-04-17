@@ -4,7 +4,7 @@ using System;
 public abstract partial class StatePlayer : Node2D
 {
 	static protected Player Player { get; private set; } // Node do player
-	static protected StatePlayer Manager { get; private set; } // Gerênciador dos componentes
+	static protected StatePlayer Manager { get; private set; } // Gerênciador dos componentes 
 
 	// Input ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	static public Vector2 Direction { get; protected set; } // Vector com entrada do teclado (Cima, Baixo, Direita, Esquerda)
@@ -30,6 +30,9 @@ public abstract partial class StatePlayer : Node2D
 	static public bool IsMovingH { get; private set; } = false; // Controle se está movendo na horizontal
 	static public bool IsMovingV { get; private set; } = false; // Controle se está movendo no vertical
 
+	// Outros ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+	static public string CurrentCollision { get; private set; } = "default_collision"; // Indicador da colisão atual do player
+
 	// ==========================================================================================================================================================================================
 
 	// Init de cada componente. Chamada ao iniciar a classe
@@ -49,6 +52,10 @@ public abstract partial class StatePlayer : Node2D
 		// Atualiza variáveis do estado inicial do player
 		WasInAir = Player.StartInAir;
 		FlipH = Player.StartFlipH;
+
+		// Sinais para a alteração da área de colisão do player
+		Player.DashStarted += OnDashStarted;
+		Player.DashFinished += OnDashFinished;
 	}
 
 	// Chamada pelo Gerênciador a cada loop
@@ -70,5 +77,18 @@ public abstract partial class StatePlayer : Node2D
 
 		// Atualiza o flip no eixo horizontal do player
 		FlipH = Direction.X != 0 ? Direction.X < 0 : FlipH;
+	}
+
+	// Sinais ====================================================================================================================================================================================
+	static private void OnDashStarted()
+	{
+		Player.EmitSignal("ToggleCollision", "dash_collision");
+		CurrentCollision = "dash_collision";
+	}
+
+	static private void OnDashFinished()
+	{
+		Player.EmitSignal("ToggleCollision", "default_collision");
+		CurrentCollision = "default_collision";
 	}
 }
