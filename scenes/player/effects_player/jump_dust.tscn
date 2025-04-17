@@ -1,0 +1,46 @@
+[gd_scene load_steps=7 format=3 uid="uid://dtqxf7opynpen"]
+
+[ext_resource type="Script" uid="uid://k3bgrsh1m1c0" path="res://scripts/particles/Particles.cs" id="1_mp2y6"]
+
+[sub_resource type="Curve" id="Curve_mp2y6"]
+_limits = [-360.0, 360.0, 0.0, 1.0]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_mp2y6"]
+curve = SubResource("Curve_mp2y6")
+
+[sub_resource type="Curve" id="Curve_dovo2"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.988327, 0.232787), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_gmlin"]
+curve = SubResource("Curve_dovo2")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_lvxji"]
+particle_flag_disable_z = true
+angle_min = -100.0
+angle_max = 300.0
+angle_curve = SubResource("CurveTexture_mp2y6")
+direction = Vector3(0, -1, 0)
+initial_velocity_min = 10.0
+initial_velocity_max = 20.0
+angular_velocity_min = -1.60933e-05
+angular_velocity_max = 100.0
+radial_velocity_min = -2.23517e-05
+radial_velocity_max = 20.0
+gravity = Vector3(0, 60, 0)
+scale_min = 2.0
+scale_max = 4.0
+scale_curve = SubResource("CurveTexture_gmlin")
+collision_use_scale = true
+
+[node name="jump_dust" type="GPUParticles2D"]
+modulate = Color(1, 1, 1, 0.27451)
+emitting = false
+amount = 5
+lifetime = 0.5
+one_shot = true
+explosiveness = 1.0
+process_material = SubResource("ParticleProcessMaterial_lvxji")
+script = ExtResource("1_mp2y6")

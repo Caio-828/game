@@ -1,0 +1,41 @@
+[gd_scene load_steps=7 format=3 uid="uid://b8xxbeokow5c"]
+
+[ext_resource type="Script" uid="uid://k3bgrsh1m1c0" path="res://scripts/particles/Particles.cs" id="1_yx2xm"]
+
+[sub_resource type="Curve" id="Curve_eqhbx"]
+_data = [Vector2(0, 0.584426), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_yx2xm"]
+curve = SubResource("Curve_eqhbx")
+
+[sub_resource type="Curve" id="Curve_xy0d6"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.243443), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_31rs1"]
+curve = SubResource("Curve_xy0d6")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_xglt8"]
+particle_flag_disable_z = true
+angle_min = 1.07288e-05
+angle_max = 90.0
+direction = Vector3(-1, 0, 0)
+spread = 180.0
+initial_velocity_min = 20.0
+initial_velocity_max = 50.0
+angular_velocity_min = -99.0
+angular_velocity_max = 101.0
+gravity = Vector3(0, 0, 0)
+scale_min = 2.0
+scale_max = 5.0
+scale_curve = SubResource("CurveTexture_31rs1")
+alpha_curve = SubResource("CurveTexture_yx2xm")
+
+[node name="dash_impact" type="GPUParticles2D"]
+emitting = false
+amount = 24
+one_shot = true
+explosiveness = 1.0
+process_material = SubResource("ParticleProcessMaterial_xglt8")
+script = ExtResource("1_yx2xm")

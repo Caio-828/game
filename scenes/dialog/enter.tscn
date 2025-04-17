@@ -1,0 +1,42 @@
+[gd_scene load_steps=8 format=3 uid="uid://bumo7kq4tuj3j"]
+
+[ext_resource type="Script" uid="uid://cmmw6fcrl4i34" path="res://scripts/dialog/Dialog.cs" id="1_vy24t"]
+[ext_resource type="Texture2D" uid="uid://c1e6qlbnekito" path="res://assets/sprite_sheets/enter.png" id="1_xrgms"]
+[ext_resource type="PackedScene" uid="uid://bntwiv5t0gxh6" path="res://scenes/effects/fade_effect.tscn" id="2_vy24t"]
+[ext_resource type="PackedScene" uid="uid://bd8qm3qa6uefr" path="res://scenes/effects/floating_effect.tscn" id="3_vy24t"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xrgms"]
+atlas = ExtResource("1_xrgms")
+region = Rect2(0, 0, 16, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_67hkl"]
+atlas = ExtResource("1_xrgms")
+region = Rect2(16, 0, 16, 24)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_mel23"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xrgms")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_67hkl")
+}],
+"loop": true,
+"name": &"default",
+"speed": 2.0
+}]
+
+[node name="enter" type="Node2D"]
+script = ExtResource("1_vy24t")
+
+[node name="fade_effect" parent="." instance=ExtResource("2_vy24t")]
+
+[node name="floating_effect" parent="fade_effect" instance=ExtResource("3_vy24t")]
+
+[node name="animated" type="AnimatedSprite2D" parent="fade_effect/floating_effect"]
+scale = Vector2(0.9, 0.9)
+sprite_frames = SubResource("SpriteFrames_mel23")
+autoplay = "default"
+frame = 1
+frame_progress = 0.210735

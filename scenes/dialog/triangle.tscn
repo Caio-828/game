@@ -1,0 +1,42 @@
+[gd_scene load_steps=8 format=3 uid="uid://cvlsu44ppa1b7"]
+
+[ext_resource type="Script" uid="uid://cmmw6fcrl4i34" path="res://scripts/dialog/Dialog.cs" id="1_smm1b"]
+[ext_resource type="PackedScene" uid="uid://bntwiv5t0gxh6" path="res://scenes/effects/fade_effect.tscn" id="2_smm1b"]
+[ext_resource type="Texture2D" uid="uid://cxx2sbqitpj22" path="res://assets/sprite_sheets/triangle.png" id="3_jrhjc"]
+[ext_resource type="PackedScene" uid="uid://bd8qm3qa6uefr" path="res://scenes/effects/floating_effect.tscn" id="3_smm1b"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ii8pw"]
+atlas = ExtResource("3_jrhjc")
+region = Rect2(0, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2014m"]
+atlas = ExtResource("3_jrhjc")
+region = Rect2(24, 0, 24, 24)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_04gqy"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ii8pw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2014m")
+}],
+"loop": true,
+"name": &"default",
+"speed": 2.0
+}]
+
+[node name="triangle" type="Node2D"]
+script = ExtResource("1_smm1b")
+
+[node name="fade_effect" parent="." instance=ExtResource("2_smm1b")]
+
+[node name="floating_effect" parent="fade_effect" instance=ExtResource("3_smm1b")]
+
+[node name="animated" type="AnimatedSprite2D" parent="fade_effect/floating_effect"]
+scale = Vector2(0.9, 0.9)
+sprite_frames = SubResource("SpriteFrames_04gqy")
+autoplay = "default"
+frame = 1
+frame_progress = 0.397545

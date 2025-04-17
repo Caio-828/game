@@ -1,0 +1,25 @@
+[gd_scene load_steps=3 format=3 uid="uid://cjsttfyy2avk2"]
+
+[ext_resource type="Texture2D" uid="uid://b0fb1bl7t7v6c" path="res://assets/mush_cave/fg/layer1.png" id="1_0w86m"]
+[ext_resource type="Texture2D" uid="uid://n7uq3mksavmq" path="res://assets/mush_cave/fg/overlay.png" id="1_g8cga"]
+
+[node name="foreground" type="Node2D"]
+
+[node name="overlay" type="Parallax2D" parent="."]
+scale = Vector2(2, 2)
+scroll_scale = Vector2(1.1, 1)
+repeat_size = Vector2(288, 0)
+repeat_times = 5
+
+[node name="overlay" type="Sprite2D" parent="overlay"]
+position = Vector2(0.5, -162)
+texture = ExtResource("1_g8cga")
+
+[node name="parallax1" type="Parallax2D" parent="."]
+scale = Vector2(2, 2)
+scroll_scale = Vector2(1.1, 1)
+repeat_size = Vector2(288, 0)
+repeat_times = 5
+
+[node name="layer1" type="Sprite2D" parent="parallax1"]
+texture = ExtResource("1_0w86m")

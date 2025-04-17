@@ -1,0 +1,43 @@
+[gd_scene load_steps=5 format=3 uid="uid://cy0yfqxcrxmug"]
+
+[ext_resource type="Texture2D" uid="uid://cpjs4wvthgu0c" path="res://assets/mush_cave/bg/layer1.png" id="1_5hm6i"]
+[ext_resource type="Texture2D" uid="uid://4b2olwmai5g7" path="res://assets/mush_cave/bg/layer2.png" id="2_rv8r0"]
+[ext_resource type="Texture2D" uid="uid://d151jvga4uy6v" path="res://assets/mush_cave/bg/layer3.png" id="3_m6u5w"]
+[ext_resource type="Texture2D" uid="uid://r8r7nxi14hfm" path="res://assets/mush_cave/bg/layer4.png" id="4_3568r"]
+
+[node name="background" type="Node2D"]
+
+[node name="parallax1" type="Parallax2D" parent="."]
+scale = Vector2(2, 2)
+repeat_size = Vector2(288, 162)
+repeat_times = 5
+
+[node name="layer1" type="Sprite2D" parent="parallax1"]
+texture = ExtResource("1_5hm6i")
+
+[node name="parallax2" type="Parallax2D" parent="."]
+scale = Vector2(2, 2)
+scroll_scale = Vector2(0.7, 1)
+repeat_size = Vector2(288, 0)
+repeat_times = 5
+
+[node name="layer2" type="Sprite2D" parent="parallax2"]
+texture = ExtResource("2_rv8r0")
+
+[node name="parallax3" type="Parallax2D" parent="."]
+scale = Vector2(2, 2)
+scroll_scale = Vector2(0.8, 1)
+repeat_size = Vector2(288, 0)
+repeat_times = 5
+
+[node name="layer3" type="Sprite2D" parent="parallax3"]
+texture = ExtResource("3_m6u5w")
+
+[node name="parallax4" type="Parallax2D" parent="."]
+scale = Vector2(2, 2)
+scroll_scale = Vector2(0.9, 1)
+repeat_size = Vector2(288, 0)
+repeat_times = 5
+
+[node name="layer4" type="Sprite2D" parent="parallax4"]
+texture = ExtResource("4_3568r")
