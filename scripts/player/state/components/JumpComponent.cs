@@ -12,7 +12,7 @@ public partial class JumpComponent : StatePlayer
 
     public override void Update(float delta)
     {
-		if (IsDashing || IsOnWall || IsWallJumping)
+		if (IsDashing || IsOnWall || IsWallJumping || IsOnLadder)
 		{
 			IsJumping = false;
 			return;
@@ -37,11 +37,7 @@ public partial class JumpComponent : StatePlayer
 
 	private void MainLogic()
 	{
-		bool canJump = PressedKeyJump &&
-		_coyoteTimer < CoyoteTime &&
-		!IsJumping;
-
-		if (canJump)
+		if (CanJump())
 		{
 			IsJumping = true;
 			_velocity.Y = JumpForce;
@@ -50,5 +46,19 @@ public partial class JumpComponent : StatePlayer
 
 		// Mecânica de salto curto
 		if (ReleasedKeyJump && _velocity.Y < 0 && IsJumping) _velocity.Y *= 0.5f;
+	}
+
+	private bool CanJump()
+	{
+		if (!PressedKeyJump)
+			return false;
+		
+		if (IsJumping)
+			return false;
+
+		if (_coyoteTimer >= CoyoteTime)
+			return false;
+
+		return true;
 	}
 }

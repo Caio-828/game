@@ -25,6 +25,9 @@ public abstract partial class StatePlayer : Node2D
 	static public bool IsDashing { get; protected set; } = false; // Controle se está dashando
 
 	static public bool IsOnWall { get; protected set; } = false; // Controle se está na parede
+
+	static public bool OnLadderArea { get; protected set; } = false; // Controle se está na área de uma escada
+	static public bool IsOnLadder { get; protected set; } = false; // Controle se está subindo uma escada
 	
 	// Com set privado
 	static public bool IsMovingH { get; private set; } = false; // Controle se está movendo na horizontal

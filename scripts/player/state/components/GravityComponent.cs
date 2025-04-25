@@ -5,7 +5,7 @@ public partial class GravityComponent : StatePlayer
 {
     public override void Update(float delta)
     {
-		if (IsDashing) return;
+		if (IsDashing || IsOnLadder) return;
 
 		// Aplicando gravidade
 		if (!Player.IsOnFloor())

@@ -29,4 +29,9 @@ public partial class Player : CharacterBody2D
 		Manager.Update((float)delta);
 		MoveAndSlide();
 	}
+
+	public void Die()
+	{
+		Manager.Die();
+	}
 }	

@@ -115,7 +115,9 @@ public partial class WallJumpComponent : StatePlayer
 
         // Verifica se o tile sendo colidido permite wall jump
         Map map = Global.Manager.GetMap();
-        if (!map.CheckTileCanWallJump(collisionPoint)) return;
+        Variant? can_wall_jump = map.CheckTileCustomData("can_wall_jump", collisionPoint);
+        // Retorna pois o tile não tem a propriedade ou não permite wall jump
+        if (can_wall_jump == null || !(bool)can_wall_jump) return;
 
         // Segue caso seja permitido wall jump nesta parede
 		IsOnWall = true;

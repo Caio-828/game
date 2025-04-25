@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://bu7et8okuhyui"
-path="res://.godot/imported/tutorial_tileset.png-d942990dbf6e6dd3b6c9226f4ebe7a1e.ctex"
+path="res://.godot/imported/debug_level_tileset.png-997c0ff4e91b1d1bc4558bd26dae65cc.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/tileset/tutorial/tutorial_tileset.png"
-dest_files=["res://.godot/imported/tutorial_tileset.png-d942990dbf6e6dd3b6c9226f4ebe7a1e.ctex"]
+source_file="res://assets/tileset/debug_level/debug_level_tileset.png"
+dest_files=["res://.godot/imported/debug_level_tileset.png-997c0ff4e91b1d1bc4558bd26dae65cc.ctex"]
 
 [params]
 

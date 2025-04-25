@@ -15,6 +15,13 @@ public partial class AnimationComponent : StatePlayer
     {
 		_texture.FlipH = FlipH;
 
+		if (IsOnLadder)
+		{
+			_texture.Play("climp_ladder");
+			if (!IsMovingV)_texture.Pause();
+			return;
+		}
+
 		if (IsDashing)
 		{
 			_texture.Play("dash");

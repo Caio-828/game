@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=3 uid="uid://d0p2nwk3rfc0u"]
+[gd_scene load_steps=38 format=3 uid="uid://d0p2nwk3rfc0u"]
 
 [ext_resource type="Texture2D" uid="uid://c37omn8y3bv1k" path="res://assets/sprite_sheets/player.png" id="1_3vyb7"]
 [ext_resource type="Script" uid="uid://cywbsv1r43huk" path="res://scripts/player/Player.cs" id="1_gmlin"]
@@ -11,12 +11,21 @@
 [ext_resource type="Script" uid="uid://b54acr8iildmb" path="res://scripts/player/state/components/DashComponent.cs" id="5_p47bc"]
 [ext_resource type="Script" uid="uid://b71onas2soa51" path="res://scripts/player/state/components/EffectsComponent.cs" id="7_0owmy"]
 [ext_resource type="Script" uid="uid://cqdj0ogjqkjd2" path="res://scripts/player/state/components/WallJumpComponent.cs" id="9_5gtgg"]
+[ext_resource type="Script" uid="uid://cg3prfr74eai5" path="res://scripts/player/state/components/ClimbLaddersComponent.cs" id="12_fm80t"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0owmy"]
-size = Vector2(14.5037, 36.0624)
+size = Vector2(14.5037, 43)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_je7p5"]
 size = Vector2(14.5, 33)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gx1jg"]
+atlas = ExtResource("1_3vyb7")
+region = Rect2(0, 230, 36, 45)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ugbui"]
+atlas = ExtResource("1_3vyb7")
+region = Rect2(37, 230, 36, 45)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_5gtgg"]
 atlas = ExtResource("1_3vyb7")
@@ -100,6 +109,17 @@ region = Rect2(111, 184, 36, 45)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_f1ej7"]
 animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gx1jg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ugbui")
+}],
+"loop": true,
+"name": &"climp_ladder",
+"speed": 5.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_5gtgg")
@@ -197,12 +217,14 @@ floor_snap_length = 10.0
 script = ExtResource("1_gmlin")
 
 [node name="default_collision" type="CollisionShape2D" parent="."]
+visible = false
 visibility_layer = 2
 position = Vector2(0, 0.5)
 shape = SubResource("RectangleShape2D_0owmy")
 script = ExtResource("2_je7p5")
 
 [node name="dash_collision" type="CollisionShape2D" parent="."]
+visible = false
 position = Vector2(0, 2)
 shape = SubResource("RectangleShape2D_je7p5")
 disabled = true
@@ -249,3 +271,6 @@ position = Vector2(0, 22.5)
 
 [node name="dash_impact_pos" type="Marker2D" parent="state/effects/markers"]
 position = Vector2(-10, 15)
+
+[node name="climb_ladders" type="Node2D" parent="state"]
+script = ExtResource("12_fm80t")
