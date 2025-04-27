@@ -10,7 +10,7 @@ public partial class Camera : Camera2D
 		positionSmoothin = PositionSmoothingEnabled;
 		Global.Transition.Finished += OnAnimationFinished;
 
-		if (string.IsNullOrEmpty(Global.Manager.FromScene)) return;
+		if (string.IsNullOrEmpty(Global.FromScene)) return;
 		
 		PositionSmoothingEnabled = false;
 	}

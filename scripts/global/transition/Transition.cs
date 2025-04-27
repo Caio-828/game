@@ -3,7 +3,6 @@ using System;
 
 public partial class Transition : CanvasLayer
 {
-	Global _global;
 	[Signal] public delegate void StartedEventHandler();
 	[Signal] public delegate void PeakEventHandler();
 	[Signal] public delegate void FinishedEventHandler();
@@ -18,7 +17,6 @@ public partial class Transition : CanvasLayer
 
 	public override void _Ready()
 	{
-		_global = GetNode<Global>("/root/Global");
 
 		_color_rect = GetNode<ColorRect>("color_rect");
 		_animation = GetNode<AnimationPlayer>("animation");
@@ -42,7 +40,7 @@ public partial class Transition : CanvasLayer
 			if (animationOut == "circle_player_out")
 			{
 				// Atualiza a posição do shaders se a transição de saída for a circle_player
-				UpdatePlayerPositionInShader(_global.CheckPoint.GlobalPosition);
+				UpdatePlayerPositionInShader(Global.CheckPoint.GlobalPosition);
 			}
 
             _animation.Play(animationOut);
@@ -64,7 +62,7 @@ public partial class Transition : CanvasLayer
 
 		if (animationIn == "circle_player" || animationOut == "circle_player")
 		{
-			UpdatePlayerPositionInShader(_global.GetPlayer().GlobalPosition);
+			UpdatePlayerPositionInShader(Global.GetPlayer().GlobalPosition);
 		};
 
 		_animation.Play($"{animationIn}_{EndIn}");

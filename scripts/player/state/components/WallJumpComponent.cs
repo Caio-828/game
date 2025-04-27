@@ -114,7 +114,7 @@ public partial class WallJumpComponent : StatePlayer
         Vector2 collisionPoint = _rayCast.GlobalPosition + _rayCast.TargetPosition.Rotated(_rayCast.GlobalRotation);
 
         // Verifica se o tile sendo colidido permite wall jump
-        Map map = Global.Manager.GetMap();
+        Map map = Global.GetMap();
         Variant? can_wall_jump = map.CheckTileCustomData("can_wall_jump", collisionPoint);
         // Retorna pois o tile não tem a propriedade ou não permite wall jump
         if (can_wall_jump == null || !(bool)can_wall_jump) return;

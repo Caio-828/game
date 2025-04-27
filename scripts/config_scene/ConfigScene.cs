@@ -12,7 +12,7 @@ public partial class ConfigScene : Node2D
 
 	public override void _Ready()
 	{
-		_player = Global.Manager.GetPlayer();
+		_player = Global.GetPlayer();
 
 		UpdatePlayerState();
 
@@ -26,19 +26,19 @@ public partial class ConfigScene : Node2D
 
 			_mainCheckPoint.GlobalPosition = _player.GlobalPosition; // Guarda a posição que o player iniciou
 			
-			Global.Manager.CheckPoint = _mainCheckPoint; // Reseta o ultimo check point pois mudou de cena
+			Global.CheckPoint = _mainCheckPoint; // Reseta o ultimo check point pois mudou de cena
 
 			_player.Died += PlayerRespawn; // Ação quando o player morrer
 		}
 	}
 	private void UpdatePlayerState()
 	{
-		if (string.IsNullOrEmpty(Global.Manager.FromScene)) return; // Retorna sem fazer nada caso FromScene esteja vazio
+		if (string.IsNullOrEmpty(Global.FromScene)) return; // Retorna sem fazer nada caso FromScene esteja vazio
 		
-		Marker2D marker = GetNode<Marker2D>($"scene_points/{Global.Manager.FromScene}_pos"); // Pega a posição que o player deve spawnar
+		Marker2D marker = GetNode<Marker2D>($"scene_points/{Global.FromScene}_pos"); // Pega a posição que o player deve spawnar
 
 		// Atualiza variáveis de estaso do player definido pelo toggleScene
-		ToggleScene toggleScene = GetNode<ToggleScene>($"scene_points/{Global.Manager.FromScene}");
+		ToggleScene toggleScene = GetNode<ToggleScene>($"scene_points/{Global.FromScene}");
         _player.StartFlipH = toggleScene.StartFlipH;
 		_player.StartInAir = toggleScene.StartInAir;
 
@@ -47,6 +47,6 @@ public partial class ConfigScene : Node2D
 
 	private void PlayerRespawn()
 	{
-		_player.GlobalPosition = Global.Manager.CheckPoint.GlobalPosition; // Atualiza a posição do player para o último check point
+		_player.GlobalPosition = Global.CheckPoint.GlobalPosition; // Atualiza a posição do player para o último check point
 	}
 }

@@ -66,7 +66,7 @@ public partial class ToggleScene : Area2D
 			string path = GetScenePath(); // Pega o caminho da cena de destino
 			if (path == "") return;
 
-			Global.Manager.FromScene = _configScene.Name; // Atualiza o FromScene
+			Global.FromScene = _configScene.Name; // Atualiza o FromScene
 
 			_configScene.QueueFree(); // Liberando a memória da cena atual
 			GetTree().ChangeSceneToFile(path);

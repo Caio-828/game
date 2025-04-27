@@ -12,6 +12,6 @@ public partial class CheckPoint : Node2D
 	// Sinais
 	private void _on_area_body_entered(Node body)
 	{
-		if (body is Player) Global.Manager.CheckPoint = this;
+		if (body is Player) Global.CheckPoint = this;
 	}
 }

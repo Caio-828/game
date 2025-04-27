@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=3 uid="uid://d0p2nwk3rfc0u"]
+[gd_scene load_steps=40 format=3 uid="uid://d0p2nwk3rfc0u"]
 
 [ext_resource type="Texture2D" uid="uid://c37omn8y3bv1k" path="res://assets/sprite_sheets/player.png" id="1_3vyb7"]
 [ext_resource type="Script" uid="uid://cywbsv1r43huk" path="res://scripts/player/Player.cs" id="1_gmlin"]
@@ -12,6 +12,7 @@
 [ext_resource type="Script" uid="uid://b71onas2soa51" path="res://scripts/player/state/components/EffectsComponent.cs" id="7_0owmy"]
 [ext_resource type="Script" uid="uid://cqdj0ogjqkjd2" path="res://scripts/player/state/components/WallJumpComponent.cs" id="9_5gtgg"]
 [ext_resource type="Script" uid="uid://cg3prfr74eai5" path="res://scripts/player/state/components/ClimbLaddersComponent.cs" id="12_fm80t"]
+[ext_resource type="Script" uid="uid://cwdlu3ojnncvs" path="res://scripts/player/state/components/InteractiveTileDetectorComponent.cs" id="13_gx1jg"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0owmy"]
 size = Vector2(14.5037, 43)
@@ -211,8 +212,11 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gx1jg"]
+size = Vector2(12, 39)
+
 [node name="player" type="CharacterBody2D"]
-collision_mask = 30
+collision_mask = 58
 floor_snap_length = 10.0
 script = ExtResource("1_gmlin")
 
@@ -245,10 +249,14 @@ script = ExtResource("4_lvxji")
 [node name="dash" type="Node2D" parent="state"]
 script = ExtResource("5_p47bc")
 
+[node name="climb_ladders" type="Node2D" parent="state"]
+script = ExtResource("12_fm80t")
+
 [node name="wall_jump" type="Node2D" parent="state"]
 script = ExtResource("9_5gtgg")
 
 [node name="ray_cast" type="RayCast2D" parent="state/wall_jump"]
+visible = false
 target_position = Vector2(8, 0)
 collision_mask = 2
 
@@ -261,10 +269,10 @@ animation = &"idle"
 autoplay = "idle"
 
 [node name="effects" type="Node2D" parent="state"]
-visible = false
 script = ExtResource("7_0owmy")
 
 [node name="markers" type="Node2D" parent="state/effects"]
+visible = false
 
 [node name="jump_dust_pos" type="Marker2D" parent="state/effects/markers"]
 position = Vector2(0, 22.5)
@@ -272,5 +280,53 @@ position = Vector2(0, 22.5)
 [node name="dash_impact_pos" type="Marker2D" parent="state/effects/markers"]
 position = Vector2(-10, 15)
 
-[node name="climb_ladders" type="Node2D" parent="state"]
-script = ExtResource("12_fm80t")
+[node name="interactive_tile_detector" type="Node2D" parent="state"]
+script = ExtResource("13_gx1jg")
+
+[node name="area" type="Area2D" parent="state/interactive_tile_detector"]
+visible = false
+collision_layer = 0
+collision_mask = 4
+
+[node name="collision" type="CollisionShape2D" parent="state/interactive_tile_detector/area"]
+position = Vector2(0, 0.5)
+shape = SubResource("RectangleShape2D_gx1jg")
+
+[node name="markers" type="Node2D" parent="state/interactive_tile_detector"]
+visible = false
+
+[node name="marker1" type="Marker2D" parent="state/interactive_tile_detector/markers"]
+position = Vector2(-7, -20)
+
+[node name="marker2" type="Marker2D" parent="state/interactive_tile_detector/markers"]
+position = Vector2(0, -20)
+
+[node name="marker3" type="Marker2D" parent="state/interactive_tile_detector/markers"]
+position = Vector2(7, -20)
+
+[node name="marker4" type="Marker2D" parent="state/interactive_tile_detector/markers"]
+position = Vector2(-7, -10)
+
+[node name="marker5" type="Marker2D" parent="state/interactive_tile_detector/markers"]
+position = Vector2(7, -10)
+
+[node name="marker6" type="Marker2D" parent="state/interactive_tile_detector/markers"]
+position = Vector2(-7, 0)
+
+[node name="marker7" type="Marker2D" parent="state/interactive_tile_detector/markers"]
+position = Vector2(7, 0)
+
+[node name="marker8" type="Marker2D" parent="state/interactive_tile_detector/markers"]
+position = Vector2(-7, 10)
+
+[node name="marker9" type="Marker2D" parent="state/interactive_tile_detector/markers"]
+position = Vector2(7, 10)
+
+[node name="marker10" type="Marker2D" parent="state/interactive_tile_detector/markers"]
+position = Vector2(-7, 21)
+
+[node name="marker11" type="Marker2D" parent="state/interactive_tile_detector/markers"]
+position = Vector2(0, 21)
+
+[node name="marker12" type="Marker2D" parent="state/interactive_tile_detector/markers"]
+position = Vector2(7, 21)

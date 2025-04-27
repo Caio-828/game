@@ -11,6 +11,9 @@ public partial class Player : CharacterBody2D
 	[Signal] public delegate void DashFinishedEventHandler(); // Sinal emitido ao finalizar o dash
 	[Signal] public delegate void DiedEventHandler(); // Sinal emitido quando o player morre
 	[Signal] public delegate void ToggleCollisionEventHandler(string collision); // Sinal emitido ao trocar a colisão do player
+	[Signal] public delegate void TileAreaEnteredEventHandler(string type); // Sinal emitido ao entrar na área de colisão de um tile interativo
+	[Signal] public delegate void TileAreaExitedEventHandler(string type); // Sinal emitido ao sair da área de colisão de um tile interativo
+
 
 	public PlayerManager Manager { get; private set; } // Gerenciador de estado do player
 
@@ -18,11 +21,10 @@ public partial class Player : CharacterBody2D
  
     public override void _Ready()
     {	
+		Global.SetPlayer(this); // Atribuindo player a referência global
+
 		Manager = GetNode<PlayerManager>("state");
 		Manager.Init(this);
-
-		// Atribuindo player a referência global
-		Global.Manager.SetPlayer(this);
     }
     public override void _PhysicsProcess(double delta)
 	{

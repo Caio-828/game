@@ -9,14 +9,11 @@ public partial class ClimbLaddersComponent : StatePlayer
 
     public override void Init()
     {
-        _map = Global.Manager.GetMap();
+        _map = Global.GetMap();
     }
 
     public override void Update(float delta)
     {
-		Variant? isLadder = _map.CheckTileCustomData("is_ladder", Player.GlobalPosition);
-		OnLadderArea = isLadder != null && (bool)isLadder;
-
 		if (!OnLadderArea)
 		{
 			IsOnLadder = false;
@@ -37,7 +34,7 @@ public partial class ClimbLaddersComponent : StatePlayer
 		if (IsMovingV)
 		{
 			// Centraliza a posição do player no eixo x para alinhar a escada
-			Vector2 centerPositionTile = _map.CenterPositinTile(Player.GlobalPosition);
+			Vector2 centerPositionTile = (Vector2)InteractiveTilesTouched["GlobalPosition"];
 			Player.GlobalPosition = new Vector2(centerPositionTile.X, Player.GlobalPosition.Y);	
 		}
 
