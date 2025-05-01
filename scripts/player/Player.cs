@@ -10,7 +10,7 @@ public partial class Player : CharacterBody2D
 	[Signal] public delegate void DashStartedEventHandler(); // Sinal emitido ao iniciar o dash
 	[Signal] public delegate void DashFinishedEventHandler(); // Sinal emitido ao finalizar o dash
 	[Signal] public delegate void DiedEventHandler(); // Sinal emitido quando o player morre
-	[Signal] public delegate void ToggleCollisionEventHandler(string collision); // Sinal emitido ao trocar a colisão do player
+	[Signal] public delegate void ToggleCollisionEventHandler(); // Sinal emitido ao trocar a colisão do player
 	[Signal] public delegate void TileAreaEnteredEventHandler(string type); // Sinal emitido ao entrar na área de colisão de um tile interativo
 	[Signal] public delegate void TileAreaExitedEventHandler(string type); // Sinal emitido ao sair da área de colisão de um tile interativo
 

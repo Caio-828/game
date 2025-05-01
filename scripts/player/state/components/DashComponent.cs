@@ -3,6 +3,7 @@ using System;
 
 public partial class DashComponent : StatePlayer
 {
+	[ExportGroup("Component settings")]
 	[Export] private float DashSpeed = 300.0f; // Velocidade do dash
 	[Export] private float DashDuration = 0.3f; // Duração do dash
 	[Export] private float DashCooldown = 0.5f; // Tempo de recarga entre dashes
@@ -15,9 +16,15 @@ public partial class DashComponent : StatePlayer
 
 	Vector2 _velocity;
 
-
-    public override void Update(float delta)
+    public override void UpdateComponent(float delta)
     {
+		if (IsOnLadder)
+		{
+			IsDashing = false;
+			_dashTimer = 0f;
+			return;
+		}
+
 		_velocity = Player.Velocity;
 
 		if (Player.IsOnFloor()) _dashCounter = 0;
@@ -55,8 +62,8 @@ public partial class DashComponent : StatePlayer
 
 	private void StartDash()
 	{
-		Player.EmitSignal("DashStarted");
 		IsDashing = true;
+		Player.EmitSignal("DashStarted");
 		_canDash = false;
 		_dashTimer = 0f;
 		
@@ -64,8 +71,8 @@ public partial class DashComponent : StatePlayer
 	}
 	private void EndDash()
 	{
-		Player.EmitSignal("DashFinished");
 		IsDashing = false;
+		Player.EmitSignal("DashFinished");
 		_dashTimer = 0f;
 	}
 }

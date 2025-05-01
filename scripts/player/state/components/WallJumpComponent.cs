@@ -3,6 +3,7 @@ using Godot;
 
 public partial class WallJumpComponent : StatePlayer
 {
+    [ExportGroup("Component settings")]
     [Export] private float WallJumpHorizontalForce = 200.0f; // Força para lado oposto da parede
     [Export] private float JumpForce = -250.0f; // Força do pulo
 	[Export] private float WallSlideSpeed = 30.0f; // Velocidade de deslizamento na parede
@@ -24,12 +25,12 @@ public partial class WallJumpComponent : StatePlayer
 
     private Vector2 _velocity;
 
-    public override void Init()
+    public override void InitComponent()
     {
         _rayCast = GetNode<RayCast2D>("ray_cast");
     }
 
-    public override void Update(float delta)
+    public override void UpdateComponent(float delta)
     {
         _velocity = Player.Velocity;
 		_playerDirection = FlipH ? -1 : 1;

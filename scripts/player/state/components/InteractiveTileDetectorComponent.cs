@@ -10,7 +10,7 @@ public partial class InteractiveTileDetectorComponent : StatePlayer
 
 	private string _typeTile = null; // Tipo do tile a ser tocado
 
-	public override void Init()
+	public override void InitComponent()
 	{
 		_map = Global.GetMap();
 		_area = GetNode<Area2D>("area");
@@ -24,7 +24,7 @@ public partial class InteractiveTileDetectorComponent : StatePlayer
 	// Sinais
 	private void OnAreaBodyEntered(Node2D body)
 	{	
-		if (body is not TileMapLayer tileMapLayer || tileMapLayer.Name != "interactive_tiles")
+		if (body is not TileMapLayer tileMapLayer)
 			return;
 			
 		_typeTile = null;
@@ -37,7 +37,7 @@ public partial class InteractiveTileDetectorComponent : StatePlayer
 
 	private void OnAreaBodyExited(Node2D body)
 	{
-		if (body is not TileMapLayer tileMapLayer || tileMapLayer.Name != "interactive_tiles")
+		if (body is not TileMapLayer)
 			return;
 
 		if (InteractiveTilesTouched["type"] == null)

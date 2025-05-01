@@ -31,7 +31,7 @@ public partial class ToggleScene : Area2D
 
 		_sceneFolder ??= _configScene.SceneFolder;
 	}
-	public override void _Process(double delta)
+	public override void _PhysicsProcess(double delta)
 	{
 		if (!_playerInArea)
 		{

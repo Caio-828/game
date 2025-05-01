@@ -5,13 +5,13 @@ public partial class AnimationComponent : StatePlayer
 {
 	private AnimatedSprite2D _texture;
 
-    public override void Init()
+    public override void InitComponent()
     {
 		_texture = GetNode<AnimatedSprite2D>("texture");
 		_texture.FlipH = FlipH;
     }
 
-    public override void Update(float delta)
+    public override void UpdateComponent(float delta)
     {
 		_texture.FlipH = FlipH;
 
@@ -34,13 +34,19 @@ public partial class AnimationComponent : StatePlayer
 			return;
 		}
 
+		if (IsSwimming)
+		{
+			_texture.Play("swim");
+			return;
+		}
+
 		if (IsJumping)
 		{
 			_texture.Play("jump");
 			return;
 		}
 
-		if (!Player.IsOnFloor())
+		if (WasInAir)
 		{
 			_texture.Play("falling");
 			return;

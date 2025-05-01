@@ -3,16 +3,17 @@ using System;
 
 public partial class ClimbLaddersComponent : StatePlayer
 {
+	[ExportGroup("Component settings")]
 	[Export] private float MoveSpeed = 100.0f; // Velocidade de movimento subindo/descendo a escada
 
 	private Map _map; // Node do mapa
 
-    public override void Init()
+    public override void InitComponent()
     {
         _map = Global.GetMap();
     }
 
-    public override void Update(float delta)
+    public override void UpdateComponent(float delta)
     {
 		if (!OnLadderArea)
 		{

@@ -12,7 +12,7 @@ public partial class FloatingEffect : Node2D
         _initialPosition = Position;
     }
 
-	public override void _Process(double delta)
+	public override void _PhysicsProcess(double delta)
 	{
         float time = Time.GetTicksMsec() / 1000.0f;
         float offset = Amplitude * Mathf.Sin(time * Mathf.Pi * 2.0f * Frequency);

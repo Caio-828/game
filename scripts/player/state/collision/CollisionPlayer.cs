@@ -7,16 +7,20 @@ public partial class CollisionPlayer : CollisionShape2D
 	public override void _Ready()
 	{
 		_player = GetParent<Player>();
-
 		_player.ToggleCollision += OnToggleCollision;
 	}
 
 	// Sinais
-	private void OnToggleCollision(string collision)
+	private void OnToggleCollision()
 	{
-		if (Name == collision)
-			Disabled = false;
-		else
-			Disabled = true;
+		CallDeferred(nameof(UpdateCollisionState));
+	}
+
+	private void UpdateCollisionState()
+	{
+        if (Name == StatePlayer.CurrentCollision)
+            Disabled = false;
+        else
+            Disabled = true;
 	}
 }

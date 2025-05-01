@@ -3,14 +3,15 @@ using System;
 
 public partial class JumpComponent : StatePlayer
 {
-	[Export] private float JumpForce = -350.0f; // Força do pulo
+	[ExportGroup("Component settings")]
+	[Export] private float JumpForce = 350.0f; // Força do pulo
 	[Export] private float CoyoteTime = 0.1f; // Tempo de tolerância para pulo
 
 	private float _coyoteTimer; // Contador do tempo de tolerância para pulo
 
 	private Vector2 _velocity;
 
-    public override void Update(float delta)
+    public override void UpdateComponent(float delta)
     {
 		if (IsDashing || IsOnWall || IsWallJumping || IsOnLadder)
 		{
@@ -40,7 +41,7 @@ public partial class JumpComponent : StatePlayer
 		if (CanJump())
 		{
 			IsJumping = true;
-			_velocity.Y = JumpForce;
+			_velocity.Y = -JumpForce;
 			_coyoteTimer = CoyoteTime;
 		}
 

@@ -3,25 +3,34 @@ using System;
 
 public partial class GravityComponent : StatePlayer
 {
-    public override void Update(float delta)
+	private Vector2 _velocity;
+    public override void UpdateComponent(float delta)
     {
 		if (IsDashing || IsOnLadder) return;
 
-		// Aplicando gravidade
+		_velocity = Player.Velocity;
+
 		if (!Player.IsOnFloor())
 		{
-			Player.Velocity += Player.GetGravity() * delta;
+			ApplyGravity(delta);
 			WasInAir = Player.StartInAir;
-			return;
 		}
-		
-		if (WasInAir)
+		else if (WasInAir)
 		{
 			Player.EmitSignal("Landed");
 			WasInAir = false;
-			return;
+		}
+		else
+		{
+			Player.StartInAir = true;
 		}
 
-		Player.StartInAir = true;
+		Player.Velocity = _velocity;
     }
+
+	private void ApplyGravity(float delta)
+	{
+		float variation = IsOnWater ? 1.5f : 1.0f;
+		_velocity += Player.GetGravity() / variation * delta;
+	}
 }

@@ -10,7 +10,7 @@ public partial class EffectsComponent : StatePlayer
 	private Marker2D _dashImpactPos; // Posição do impacto do dash
 	private float _dashImpactPosOffset; // Desvio da posição do impacto do dash quando espelhado
 
-    public override void Init()
+    public override void InitComponent()
     {
 		_jumpDustScene = ResourceLoader.Load<PackedScene>("res://scenes/player/effects_player/jump_dust.tscn");
 		_dashImpactScene = ResourceLoader.Load<PackedScene>("res://scenes/player/effects_player/dash_impact.tscn");

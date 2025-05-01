@@ -15,6 +15,10 @@ public partial class Transition : CanvasLayer
 	private AnimationPlayer _animation; // Node da animação
 	private ShaderMaterial _shaderMaterial; // Acesso ao shaders
 
+	private Vector2? _customCoord = null; // Cordenada customizada para o shaders
+
+	private bool _updadeCustomCoordInShader = false; // Controle se atualiza a posição do player no shaders ou não
+
 	public override void _Ready()
 	{
 
@@ -27,8 +31,15 @@ public partial class Transition : CanvasLayer
 		_animation.AnimationFinished += _on_animation_finished;
 	}
 
+    public override void _Process(double delta)
+    {
+        if (_updadeCustomCoordInShader && _customCoord != null)
+			UpdateCustomCoordInShader((Vector2)_customCoord);
+    }
+
 	private void _on_animation_finished(StringName animationName)
-	{ // Função chamada ao finalizar a animação
+	{ 
+		// Função chamada ao finalizar a animação
 		string animation = animationName.ToString();
 
 		if (animation.EndsWith(EndIn))
@@ -37,10 +48,11 @@ public partial class Transition : CanvasLayer
             string animationOut = _animationOut ?? animation.Replace(EndIn, EndOut);
 
 
-			if (animationOut == "circle_player_out")
+			if (animationOut == "circle_custom_coord_out")
 			{
-				// Atualiza a posição do shaders se a transição de saída for a circle_player
-				UpdatePlayerPositionInShader(Global.CheckPoint.GlobalPosition);
+				// Atualiza a posição do shaders se a transição de saída for a circle_custom_coord
+				_customCoord = Global.CheckPoint.GlobalPosition;
+				_updadeCustomCoordInShader = true;
 			}
 
             _animation.Play(animationOut);
@@ -52,6 +64,8 @@ public partial class Transition : CanvasLayer
 		{
 			EmitSignal("Finished");
 			_color_rect.Visible = false;
+			_customCoord = null;
+			_updadeCustomCoordInShader = false;
 		}
 	}
 	public void Start ( string animationIn, string animationOut = null )
@@ -60,9 +74,11 @@ public partial class Transition : CanvasLayer
 		EmitSignal("Started");
 		_color_rect.Visible = true;
 
-		if (animationIn == "circle_player" || animationOut == "circle_player")
+		if (animationIn == "circle_custom_coord" || animationOut == "circle_custom_coord")
 		{
-			UpdatePlayerPositionInShader(Global.GetPlayer().GlobalPosition);
+			Player player = Global.GetPlayer();
+			_customCoord = player.GlobalPosition;
+			_updadeCustomCoordInShader = true;
 		};
 
 		_animation.Play($"{animationIn}_{EndIn}");
@@ -70,9 +86,9 @@ public partial class Transition : CanvasLayer
 		_animationOut = animationOut != null ? $"{animationOut}_{EndOut}" : null;
 	}
 
-	private void UpdatePlayerPositionInShader(Vector2 globalPosition)
+	private void UpdateCustomCoordInShader(Vector2 globalPosition)
 	{
-		// Transforma a posição global do player em uma posição UV (0-1)
+		// Transforma a posição global da cordenada customizada em uma posição UV (0-1)
 		// Isso é necessário pois o shaders trabalha com essa posição relativa
 
 		Camera2D camera = GetViewport().GetCamera2D();
@@ -93,7 +109,7 @@ public partial class Transition : CanvasLayer
 		Vector2 viewportGlobalSize = viewportSize / cameraZoom;
 		
 		// Calcula a posição normalizada (UV)
-		Vector2 uv = new Vector2(
+		Vector2 uv = new(
 			(globalPosition.X - viewportTopLeft.X) / viewportGlobalSize.X,
 			(globalPosition.Y - viewportTopLeft.Y) / viewportGlobalSize.Y
 		);
@@ -103,7 +119,7 @@ public partial class Transition : CanvasLayer
 		uv.Y = Mathf.Clamp(uv.Y, 0f, 1f);
 
 		// Envia ao shader
-		_shaderMaterial.SetShaderParameter("player", uv);
+		_shaderMaterial.SetShaderParameter("customCoord", uv);
 	}
 
 	public bool IsRunning() => _animation.IsPlaying();

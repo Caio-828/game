@@ -4,6 +4,9 @@ using System.Collections.Generic;
 
 public abstract partial class StatePlayer : Node2D
 {
+	[Export] public bool Disable { get; set; } = false; // Controle se o componente está desabilitado
+	
+	// statics ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	protected static Player Player { get; private set; } // Node do player
 	protected static PlayerManager Manager { get; private set; } // Gerênciador dos componentes
 
@@ -24,6 +27,9 @@ public abstract partial class StatePlayer : Node2D
 	public static bool IsJumping { get; protected set; } = false; // Controle se está pulando
 	public static bool IsWallJumping { get; protected set; } = false; // Controle se está pulando apartir da parede
 	public static bool IsDashing { get; protected set; } = false; // Controle se está dashando
+	public static bool IsSwimming { get; protected set; } = false; // Controle se está nadando
+
+	public static bool IsOnWater { get; protected set; } = false; // Controle se está na água
 
 	public static bool IsOnWall { get; protected set; } = false; // Controle se está na parede
 
@@ -46,11 +52,33 @@ public abstract partial class StatePlayer : Node2D
 
 	// ==========================================================================================================================================================================================
 
+	// Chamada do gerenciador para iniciar o componente
+	// Também pode ser usado no lugar de InitComponent para ignorar o Disable
+	// Obs*: Não funciona caso o node do manager estaja com o Disable como true
+	public virtual void Init()
+	{
+		if (Disable)
+			return;
+		
+		InitComponent();
+	}
+
+	// Chamada do gerenciador para atualizar o componente
+	// (Também pode ser usado no lugar de UpdateComponent para ignorar o Disable)
+	// Obs*: Não funciona caso o node do manager estaja com o Disable como true
+	public virtual void Update(float delta)
+	{
+		if (Disable)
+			return;
+
+		UpdateComponent(delta);
+	}
+
 	// Init de cada componente. Chamado ao iniciar a classe
-	public virtual void Init() {}
+	public virtual void InitComponent() {}
 
 	// Update de cada componente. Chamado a cada loop
-	public virtual void Update(float delta) {}
+	public virtual void UpdateComponent(float delta) {}
 
 	// ==========================================================================================================================================================================================
 
@@ -64,9 +92,12 @@ public abstract partial class StatePlayer : Node2D
 		WasInAir = Player.StartInAir;
 		FlipH = Player.StartFlipH;
 
-		// Sinais para a alteração da área de colisão do player
-		Player.DashStarted += OnDashStarted;
-		Player.DashFinished += OnDashFinished;
+		// Sinais para trocar a colisão do player no dash
+		Player.DashStarted += () => Player.EmitSignal("ToggleCollision");
+		Player.DashFinished += () => Player.EmitSignal("ToggleCollision");
+
+		// Sinal ao trocar de colisão
+		Player.ToggleCollision += OnToggleCollision;
 
 		// Sinais emitidos ao entrar/sair da área de um tile interativo
 		Player.TileAreaEntered += OnTileAreaEntered;
@@ -95,22 +126,27 @@ public abstract partial class StatePlayer : Node2D
 	}
 
 	// Sinais ====================================================================================================================================================================================
-	private static void OnDashStarted()
+	private static void OnToggleCollision()
 	{
-		Player.EmitSignal("ToggleCollision", "dash_collision");
-		CurrentCollision = "dash_collision";
-	}
+		string collision = "default_collision";
 
-	private static void OnDashFinished()
-	{
-		Player.EmitSignal("ToggleCollision", "default_collision");
-		CurrentCollision = "default_collision";
+		if (IsDashing)
+			collision = "dash_collision";
+		else if (IsSwimming)
+			collision = "swim_collision";
+
+		CurrentCollision = collision;
 	}
 
 	private static void OnTileAreaEntered(string type)
 	{
         switch (type)
         {
+			case "water":
+				IsOnWater = true;
+				Player.EmitSignal("ToggleCollision");
+				break;
+
             case "spike":
                 Player.Die();
                 break;
@@ -125,6 +161,12 @@ public abstract partial class StatePlayer : Node2D
 	{
 		switch (type)
 		{
+			case "water":
+				IsOnWater = false;
+				IsSwimming = false;
+				Player.EmitSignal("ToggleCollision");
+				break;
+
 			case "ladder":
 				OnLadderArea = false;
 				break;

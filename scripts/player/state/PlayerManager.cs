@@ -9,12 +9,18 @@ public partial class PlayerManager : StatePlayer
 
     public void Init(Player player)
     {
+		if (Disable)
+			return;
+
 		InitState(player, this);
 		InitializeComponents();
     }
 
 	public override void Update(float delta)
 	{
+		if (Disable)
+			return;
+
 		StateUpdate();
 		UpdatingComponents(delta);
 	}
@@ -24,8 +30,8 @@ public partial class PlayerManager : StatePlayer
 		// Iniciando todos os componentes
 		foreach (StatePlayer component in GetChildren().Cast<StatePlayer>())
 		{
-			component.Init();
 			Components.Add(component.Name, component);
+			component.Init();
 		}
 	}
 
@@ -37,7 +43,7 @@ public partial class PlayerManager : StatePlayer
 	public async void Die()
 	{
 		CanInput = false; // Impede o player de se mover
-		Global.Transition.Start("circle_player"); // Inicia uma transição
+		Global.Transition.Start("circle_custom_coord"); // Inicia uma transição
 
 		await ToSignal(Global.Transition, "Peak"); // Espera a transição chegar no pico para continuar
 		

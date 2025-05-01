@@ -67,6 +67,17 @@ sources/0 = SubResource("TileSetAtlasSource_qcd5l")
 [node name="debug_level" type="Node2D"]
 script = ExtResource("1_iiuve")
 
+[node name="canvas_modulate" type="CanvasModulate" parent="."]
+z_index = 1
+color = Color(0.618909, 0.58401, 0.583998, 1)
+
+[node name="check_points" type="Node2D" parent="."]
+
+[node name="check_point" parent="check_points" instance=ExtResource("4_toe8d")]
+position = Vector2(-356, -150.5)
+
+[node name="scene_points" type="Node2D" parent="."]
+
 [node name="map" type="Node2D" parent="."]
 script = ExtResource("2_uhrg7")
 
@@ -81,11 +92,6 @@ tile_set = SubResource("TileSet_1dods")
 [node name="interactive_tiles" type="TileMapLayer" parent="map"]
 tile_map_data = PackedByteArray("AADy//n/AAACAAAAAADz//r/AAACAAAAAFDz//v/AAACAAAAAFAOAAQAAAACAAAAAAANAAQAAAACAAAAAAAMAAQAAAACAAAAAAALAAQAAAACAAAAAAAKAAQAAAACAAAAAAAJAAQAAAACAAAAAAAPAAMAAAACAAAAAAAQAAMAAAACAAAAAAAbAPX/AAACAAAAAAAcAPX/AAACAAAAAAD5/wQAAAACAAAAAAD6/wQAAAACAAAAAAD7/wQAAAACAAAAAAD8/wQAAAACAAAAAAD3/wQAAAAAAAEAAAD3/wMAAAAAAAEAAAD3/wIAAAAAAAEAAAD3/wEAAAAAAAEAAAD3/wAAAAAAAAEAAAD3////AAAAAAEAAAD3//7/AAAAAAEAAAD3//3/AAAAAAEAAAD3//z/AAAAAAEAAAD3//v/AAAAAAEAAAD3//r/AAAAAAEAAAD3//n/AAAAAAAAAAA=")
 tile_set = SubResource("TileSet_toe8d")
-
-[node name="check_points" type="Node2D" parent="."]
-
-[node name="check_point" parent="check_points" instance=ExtResource("4_toe8d")]
-position = Vector2(-356, -150.5)
 
 [node name="player" parent="." instance=ExtResource("5_lpevo")]
 position = Vector2(-416, 41.5)
@@ -107,15 +113,8 @@ editor_draw_drag_margin = true
 script = ExtResource("6_p1dlt")
 
 [node name="point_light" type="PointLight2D" parent="player"]
-visible = false
 scale = Vector2(0.748956, 0.689479)
 energy = 0.5
 shadow_filter = 1
 texture = ExtResource("7_oj2r8")
 texture_scale = 3.0
-
-[node name="canvas_modulate" type="CanvasModulate" parent="."]
-visible = false
-color = Color(0.618909, 0.58401, 0.583998, 1)
-
-[node name="scene_points" type="Node2D" parent="."]

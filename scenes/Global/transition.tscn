@@ -8,7 +8,7 @@ shader = ExtResource("2_4utin")
 shader_parameter/screen_width = 1920.0
 shader_parameter/screen_height = 1080.0
 shader_parameter/center = Vector2(0.5, 0.5)
-shader_parameter/player = Vector2(0.5, 0.5)
+shader_parameter/customCoord = Vector2(0.5, 0.5)
 shader_parameter/progress = 1.0
 shader_parameter/pixel_size = 30.0
 shader_parameter/circle_size = 1.5
@@ -43,7 +43,7 @@ tracks/1/keys = {
 }
 
 [sub_resource type="Animation" id="Animation_4utin"]
-resource_name = "circle_player_in"
+resource_name = "circle_custom_coord_in"
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -82,7 +82,7 @@ tracks/2/keys = {
 }
 
 [sub_resource type="Animation" id="Animation_285q2"]
-resource_name = "circle_player_out"
+resource_name = "circle_custom_coord_out"
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -257,8 +257,8 @@ tracks/1/keys = {
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_ui8oj"]
 _data = {
 &"RESET": SubResource("Animation_h5p8y"),
-&"circle_player_in": SubResource("Animation_4utin"),
-&"circle_player_out": SubResource("Animation_285q2"),
+&"circle_custom_coord_in": SubResource("Animation_4utin"),
+&"circle_custom_coord_out": SubResource("Animation_285q2"),
 &"diamond_in": SubResource("Animation_63csu"),
 &"diamond_out": SubResource("Animation_4clph"),
 &"fade_in": SubResource("Animation_8xhov"),
