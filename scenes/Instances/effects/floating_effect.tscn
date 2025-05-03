@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://bd8qm3qa6uefr"]
+
+[ext_resource type="Script" uid="uid://xqi4mo47wm0y" path="res://scripts/Instances/effects/FloatingEffect.cs" id="1_v7yyq"]
+
+[node name="floating_effect" type="Node2D"]
+script = ExtResource("1_v7yyq")

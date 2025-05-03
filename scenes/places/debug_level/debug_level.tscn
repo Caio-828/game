@@ -1,13 +1,13 @@
 [gd_scene load_steps=13 format=4 uid="uid://bogadk8mqmm34"]
 
-[ext_resource type="Script" uid="uid://c0vilmelrq201" path="res://scripts/config_scene/ConfigScene.cs" id="1_iiuve"]
-[ext_resource type="Script" uid="uid://n1culvqx0d4r" path="res://scripts/map/Map.cs" id="2_uhrg7"]
-[ext_resource type="Texture2D" uid="uid://bu7et8okuhyui" path="res://assets/tileset/debug_level/debug_level_tileset.png" id="3_qcd5l"]
-[ext_resource type="PackedScene" uid="uid://dee03uemjj5bo" path="res://scenes/Interactable/check_point.tscn" id="4_toe8d"]
-[ext_resource type="Texture2D" uid="uid://bgux7djyyjcgw" path="res://assets/tileset/interactive_tiles/interactive_tiles.png" id="4_uhrg7"]
+[ext_resource type="Script" uid="uid://c0vilmelrq201" path="res://scripts/Instances/ConfigScene.cs" id="1_iiuve"]
+[ext_resource type="Script" uid="uid://n1culvqx0d4r" path="res://scripts/Instances/Map.cs" id="2_uhrg7"]
+[ext_resource type="Texture2D" uid="uid://bu7et8okuhyui" path="res://assets/tileset/debug_level_tileset.png" id="3_qcd5l"]
+[ext_resource type="PackedScene" uid="uid://dee03uemjj5bo" path="res://scenes/Instances/check_point.tscn" id="4_toe8d"]
+[ext_resource type="Texture2D" uid="uid://bgux7djyyjcgw" path="res://assets/tileset/interactive_tiles.png" id="4_uhrg7"]
 [ext_resource type="PackedScene" uid="uid://d0p2nwk3rfc0u" path="res://scenes/player/player.tscn" id="5_lpevo"]
-[ext_resource type="Script" uid="uid://bq6uh4x73rccv" path="res://scripts/camera/Camera.cs" id="6_p1dlt"]
-[ext_resource type="Texture2D" uid="uid://dvi6at8w4nsu5" path="res://assets/effects/light.png" id="7_oj2r8"]
+[ext_resource type="Script" uid="uid://bq6uh4x73rccv" path="res://scripts/Instances/Camera.cs" id="6_p1dlt"]
+[ext_resource type="Texture2D" uid="uid://dvi6at8w4nsu5" path="res://assets/Instances/light.png" id="7_oj2r8"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_uhrg7"]
 texture = ExtResource("3_qcd5l")

@@ -18,11 +18,14 @@ public partial class Player : CharacterBody2D
 	public PlayerManager Manager { get; private set; } // Gerenciador de estado do player
 
 	public RectangleShape2D Collision { get; internal set; } // Node da colisão do player
- 
-    public override void _Ready()
-    {	
-		Global.SetPlayer(this); // Atribuindo player a referência global
 
+    public override void _EnterTree()
+    {
+        Global.SetPlayerPath(GetPath()); // Atribuindo caminho do player para referência global
+    }
+
+    public override void _Ready()
+    {
 		Manager = GetNode<PlayerManager>("state");
 		Manager.Init(this);
     }

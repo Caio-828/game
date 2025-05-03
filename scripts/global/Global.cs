@@ -3,22 +3,35 @@ using System;
 
 public partial class Global : Node
 {
-    static public Transition Transition {get; private set;} // Referência para node da transição
+    public static Transition Transition {get; private set;} // Referência para node da transição
 
-    static private Player Player; // Node do player
-    static private Map Map; // Tile set com o terreno do mapa
+    private static Player Player { get; set; } // Node do player
+    private static Map Map { get; set; } // Tile set com o terreno do mapa
 
-    static public string FromScene { get; internal set; } // Indica de qual cena o player vem ao mudar
-    static public CheckPoint CheckPoint { get; internal set; } // Ultimo check point
+    public static string FromScene { get; internal set; } // Indica de qual cena o player vem ao mudar
+    public static CheckPoint CheckPoint { get; internal set; } // Ultimo check point
 
     public override void _Ready()
     {
         Transition = GetNode<Transition>("/root/Transition");
     }
 
-    static public Player GetPlayer() => Player;
-    static public void SetPlayer(Player player) => Player = player;
+    private static Node GetRoot()
+    {
+        return Engine.GetMainLoop() is SceneTree tree ? tree.Root : null;
+    }
 
-    static public Map GetMap() => Map;
-    static public void SetMap(Map terrain) => Map = terrain;
+    public static Player GetPlayer() => Player;
+    public static void SetPlayerPath(NodePath path)
+    {
+        Node root = GetRoot();
+        
+        if (root?.HasNode(path) ?? false)
+        {
+            Player = root.GetNode<Player>(path);
+        }
+    }
+
+    public static Map GetMap() => Map;
+    public static void SetMap(Map terrain) => Map = terrain;
 }

@@ -2,8 +2,8 @@
 
 [ext_resource type="Texture2D" uid="uid://c37omn8y3bv1k" path="res://assets/sprite_sheets/player.png" id="1_3vyb7"]
 [ext_resource type="Script" uid="uid://cywbsv1r43huk" path="res://scripts/player/Player.cs" id="1_gmlin"]
-[ext_resource type="Script" uid="uid://bpgwiibk627kc" path="res://scripts/player/state/collision/CollisionPlayer.cs" id="2_je7p5"]
-[ext_resource type="Script" uid="uid://ok6wsrhv2tih" path="res://scripts/player/state/PlayerManager.cs" id="2_qek5x"]
+[ext_resource type="Script" uid="uid://bpgwiibk627kc" path="res://scripts/player/state/CollisionPlayer.cs" id="2_je7p5"]
+[ext_resource type="Script" uid="uid://ok6wsrhv2tih" path="res://scripts/managers/PlayerManager.cs" id="2_qek5x"]
 [ext_resource type="Script" uid="uid://dvh1cl2h3mfw7" path="res://scripts/player/state/components/MovementComponent.cs" id="3_gmlin"]
 [ext_resource type="Script" uid="uid://v0w427tq1bhm" path="res://scripts/player/state/components/GravityComponent.cs" id="3_h17s1"]
 [ext_resource type="Script" uid="uid://bqbscarfuc76h" path="res://scripts/player/state/components/JumpComponent.cs" id="4_lvxji"]
@@ -258,21 +258,18 @@ floor_snap_length = 10.0
 script = ExtResource("1_gmlin")
 
 [node name="default_collision" type="CollisionShape2D" parent="."]
-visible = false
 visibility_layer = 2
 position = Vector2(0, 0.5)
 shape = SubResource("RectangleShape2D_0owmy")
 script = ExtResource("2_je7p5")
 
 [node name="dash_collision" type="CollisionShape2D" parent="."]
-visible = false
 position = Vector2(0, 2)
 shape = SubResource("RectangleShape2D_je7p5")
 disabled = true
 script = ExtResource("2_je7p5")
 
 [node name="swim_collision" type="CollisionShape2D" parent="."]
-visible = false
 position = Vector2(0, 1.5)
 shape = SubResource("RectangleShape2D_ugbui")
 disabled = true

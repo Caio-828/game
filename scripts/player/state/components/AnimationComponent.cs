@@ -14,50 +14,41 @@ public partial class AnimationComponent : StatePlayer
     public override void UpdateComponent(float delta)
     {
 		_texture.FlipH = FlipH;
+		string animation = "idle";
 
 		if (IsOnLadder)
 		{
-			_texture.Play("climp_ladder");
-			if (!IsMovingV)_texture.Pause();
-			return;
+			animation = "climp_ladder";
+			if (!IsMovingV)
+				_texture.Pause();
+			else
+				_texture.Play();
 		}
-
-		if (IsDashing)
+		 else if (IsDashing)
 		{
-			_texture.Play("dash");
-			return;
+			animation = "dash";
 		}
-
-		if (IsOnWall)
+		else if (IsOnWall)
 		{
-			_texture.Play("wall");
-			return;
+			animation = "wall";
 		}
-
-		if (IsSwimming)
+		else if (IsJumping)
 		{
-			_texture.Play("swim");
-			return;
+			animation = "jump";
 		}
-
-		if (IsJumping)
+		else if (IsSwimming)
 		{
-			_texture.Play("jump");
-			return;
+			animation = "swim";
 		}
-
-		if (WasInAir)
+		else if (WasInAir)
 		{
-			_texture.Play("falling");
-			return;
+			animation = "falling";
 		}
-
-		if (IsMovingH)
+		else if (IsMovingH)
 		{
-			_texture.Play("run");
-			return;
+			animation = "run";
 		}
 
-		_texture.Play("idle");
+		_texture.Play(animation);
     }
 }

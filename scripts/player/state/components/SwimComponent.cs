@@ -24,7 +24,7 @@ public partial class SwimComponent : StatePlayer
 		HandleSwimming();
 		HandleMovement();
 		UpdateWasSwimming();
-		
+
 		Player.Velocity = _velocity;
 	}
 
@@ -44,11 +44,6 @@ public partial class SwimComponent : StatePlayer
 		if (Direction.X != 0)
 		{
 			_velocity.X = MovementSpeed * Direction.X;
-		}
-
-		if (Direction.Y != 0)
-		{
-			_velocity.Y = MovementSpeed * Direction.Y;
 		}
 	}
 

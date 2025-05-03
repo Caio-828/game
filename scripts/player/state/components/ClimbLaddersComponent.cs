@@ -35,7 +35,7 @@ public partial class ClimbLaddersComponent : StatePlayer
 		if (IsMovingV)
 		{
 			// Centraliza a posição do player no eixo x para alinhar a escada
-			Vector2 centerPositionTile = (Vector2)InteractiveTilesTouched["GlobalPosition"];
+			Vector2 centerPositionTile = TouchTileData.GlobalPosition;
 			Player.GlobalPosition = new Vector2(centerPositionTile.X, Player.GlobalPosition.Y);	
 		}
 

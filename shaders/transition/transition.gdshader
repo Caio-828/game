@@ -3,7 +3,7 @@ shader_type canvas_item;
 uniform float screen_width = 1920;
 uniform float screen_height = 1080;
 uniform vec2 center = vec2(0.5f);
-uniform vec2 customCoord = vec2(0.5f);
+uniform vec2 playerCoord = vec2(0.5f);
 
 uniform float progress : hint_range(0,1);
 uniform float pixel_size = 15.0f;
@@ -28,7 +28,7 @@ void fragment() {
 	//Tipo Circulo na cordenada específica
 	else if (type == 2) {
 		float ratio = screen_width / screen_height;
-		if (distance(customCoord, vec2(mix(customCoord.x, UV.x, ratio), UV.y)) < circle_size * (1.0 - progress)) {
+		if (distance(playerCoord, vec2(mix(playerCoord.x, UV.x, ratio), UV.y)) < circle_size * (1.0 - progress)) {
 			COLOR.a = 0.0f;
 		}
 	}

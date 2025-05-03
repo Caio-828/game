@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://dtqxf7opynpen"]
 
-[ext_resource type="Script" uid="uid://k3bgrsh1m1c0" path="res://scripts/particles/Particles.cs" id="1_mp2y6"]
+[ext_resource type="Script" uid="uid://k3bgrsh1m1c0" path="res://scripts/Instances/Particles.cs" id="1_mp2y6"]
 
 [sub_resource type="Curve" id="Curve_mp2y6"]
 _limits = [-360.0, 360.0, 0.0, 1.0]

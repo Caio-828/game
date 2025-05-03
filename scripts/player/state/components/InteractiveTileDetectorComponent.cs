@@ -40,14 +40,13 @@ public partial class InteractiveTileDetectorComponent : StatePlayer
 		if (body is not TileMapLayer)
 			return;
 
-		if (InteractiveTilesTouched["type"] == null)
+		if (TouchTileData == TouchTileData.Empty)
 			return;
 
-		Player.EmitSignal("TileAreaExited", (string)InteractiveTilesTouched["type"]); // Emitindo sinal que saiu na área de um tile interativo
+		Player.EmitSignal("TileAreaExited", TouchTileData.Type); // Emitindo sinal que saiu da área de um tile interativo
 
 		// Resetando dados do tile interativo a ser tocado no momento
-		InteractiveTilesTouched["type"] = null;
-		InteractiveTilesTouched["GlobalPosition"] = null;
+		TouchTileData = TouchTileData.Empty;
 	}
 
 	private void CheckMarkers(TileMapLayer tileMapLayer)
@@ -65,9 +64,8 @@ public partial class InteractiveTileDetectorComponent : StatePlayer
 			// Obtém o global position do ponto central do tile interativo
 			Vector2 globalPositionTile = _map.CenterPositinTile(marker.GlobalPosition, tileMapLayer.Name);
 
-			// Salva as dados do tile interativo para permitir a utilização em outros componentes do player
-			InteractiveTilesTouched["type"] = _typeTile;
-			InteractiveTilesTouched["GlobalPosition"] = globalPositionTile;
+			// Salva os dados do tile interativo para permitir a utilização em outros componentes do player
+			TouchTileData = new(tileMapLayer.Name, _typeTile, globalPositionTile);
 			break;
 		}
 	}

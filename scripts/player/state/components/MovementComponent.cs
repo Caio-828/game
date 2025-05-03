@@ -14,13 +14,9 @@ public partial class MovementComponent : StatePlayer
 
 		// Lógica de movimentação
 		if (Direction.X != 0)
-		{
-			velocity.X = Direction.X * MovementSpeed; // Move o player
-		}
+			velocity.X = MathF.Round(Direction.X) * MovementSpeed; // Move o player
 		else
-		{
 			velocity.X = Mathf.MoveToward(velocity.X, 0, MovementSpeed); // Freia de forma gradual
-		}
 
 		Player.Velocity = velocity;
 	}

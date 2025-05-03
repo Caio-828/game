@@ -13,7 +13,7 @@ public partial class JumpComponent : StatePlayer
 
     public override void UpdateComponent(float delta)
     {
-		if (IsDashing || IsOnWall || IsWallJumping || IsOnLadder)
+		if (IsDashing || IsOnWall || IsWallJumping || IsOnLadder || IsOnWater)
 		{
 			IsJumping = false;
 			return;
